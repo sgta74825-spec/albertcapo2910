@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>albertcapo2910 | Official Bio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Pantalla de Click to Enter (Estilo oscuro limpio) */
+        #enter-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 0.6s ease;
+        }
+
+        #enter-screen h1 {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-transform: lowercase;
+            font-weight: 400;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Video de Fondo en Movimiento (AMV Oscuro) */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.45) blur(5px);
+        }
+
+        /* Contenedor Principal */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .container.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Tarjeta Estilo Glassmorphism Central */
+        .card {
+            background: rgba(12, 12, 18, 0.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 35px 30px;
+            border-radius: 28px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Avatar de Perfil con brillo */
+        .avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 2px solid rgba(56, 189, 248, 0.4);
+            margin: 0 auto 18px auto;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Fira Code', monospace;
+            color: #38bdf8;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .username {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            margin-bottom: 18px;
+        }
+
+        .bio {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        /* Botones de Redes y Enlaces */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 20px;
+            border-radius: 14px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de Entrada "Click to enter" -->
+    <div id="enter-screen" onclick="startExperience()">
+        <h1>click to enter...</h1>
+    </div>
+
+    <!-- Video de Fondo en Movimiento (AMV Oscuro) -->
+    <video autoplay muted loop id="bg-video">
+        <source src="https://www.youtube.com/embed/zQGQLEE1nQs" type="video/mp4">
+        <!-- Usamos un video de fondo dinámico optimizado para web en bucle -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-code-31910-large.mp4" type="video/mp4">
+    </video>
+
+    <!-- Audio incrustado del video que pasaste para que suene de fondo al entrar -->
+    <iframe id="bg-audio" width="0" height="0" src="https://www.youtube.com/embed/zQGQLEE1nQs?enablejsapi=1&autoplay=0&loop=1&playlist=zQGQLEE1nQs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display:none;"></iframe>
+
+    <!-- Contenido Principal con tu información -->
+    <div class="container" id="main-content">
+        <div class="card">
+            <div class="avatar">AC</div>
+            <h2>Albert</h2>
+            <div class="username">@albertcapo2910</div>
+            <p class="bio">Programador y creador de sistemas digitales. Rompiendo códigos desde cero.</p>
+            
+            <div class="links">
+                <a href="https://discord.com/users/1260789330255937648" target="_blank" class="btn">💬 Discord Oficial</a>
+                <a href="https://www.tiktok.com/@albertruiztorres7?_r=1&_t=ZS-9BVvo5x5i1h" target="_blank" class="btn">🎵 TikTok Personal</a>
+                <a href="https://github.com/sgta74825-spec" target="_blank" class="btn">💻 GitHub Repos</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startExperience() {
+            const enterScreen = document.getElementById('enter-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // Ocultar pantalla de clic y mostrar contenido principal
+            enterScreen.style.opacity = '0';
+            setTimeout(() => {
+                enterScreen.style.display = 'none';
+                mainContent.classList.add('active');
+            }, 500);
+        }
+    </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>albertcapo2910 | Official Bio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Pantalla de Click to Enter (Estilo oscuro limpio) */
+        #enter-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 0.6s ease;
+        }
+
+        #enter-screen h1 {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-transform: lowercase;
+            font-weight: 400;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Video de Fondo en Movimiento (AMV Oscuro) */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.45) blur(5px);
+        }
+
+        /* Contenedor Principal */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .container.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Tarjeta Estilo Glassmorphism Central */
+        .card {
+            background: rgba(12, 12, 18, 0.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 35px 30px;
+            border-radius: 28px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Avatar de Perfil con brillo */
+        .avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 2px solid rgba(56, 189, 248, 0.4);
+            margin: 0 auto 18px auto;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Fira Code', monospace;
+            color: #38bdf8;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .username {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            margin-bottom: 18px;
+        }
+
+        .bio {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        /* Botones de Redes y Enlaces */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 20px;
+            border-radius: 14px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de Entrada "Click to enter" -->
+    <div id="enter-screen" onclick="startExperience()">
+        <h1>click to enter...</h1>
+    </div>
+
+    <!-- Video de Fondo en Movimiento (AMV Oscuro) -->
+    <video autoplay muted loop id="bg-video">
+        <source src="https://www.youtube.com/embed/zQGQLEE1nQs" type="video/mp4">
+        <!-- Usamos un video de fondo dinámico optimizado para web en bucle -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-code-31910-large.mp4" type="video/mp4">
+    </video>
+
+    <!-- Audio incrustado del video que pasaste para que suene de fondo al entrar -->
+    <iframe id="bg-audio" width="0" height="0" src="https://www.youtube.com/embed/zQGQLEE1nQs?enablejsapi=1&autoplay=0&loop=1&playlist=zQGQLEE1nQs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display:none;"></iframe>
+
+    <!-- Contenido Principal con tu información -->
+    <div class="container" id="main-content">
+        <div class="card">
+            <div class="avatar">AC</div>
+            <h2>Albert</h2>
+            <div class="username">@albertcapo2910</div>
+            <p class="bio">Programador y creador de sistemas digitales. Rompiendo códigos desde cero.</p>
+            
+            <div class="links">
+                <a href="https://discord.com/users/1260789330255937648" target="_blank" class="btn">💬 Discord Oficial</a>
+                <a href="https://www.tiktok.com/@albertruiztorres7?_r=1&_t=ZS-9BVvo5x5i1h" target="_blank" class="btn">🎵 TikTok Personal</a>
+                <a href="https://github.com/sgta74825-spec" target="_blank" class="btn">💻 GitHub Repos</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startExperience() {
+            const enterScreen = document.getElementById('enter-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // Ocultar pantalla de clic y mostrar contenido principal
+            enterScreen.style.opacity = '0';
+            setTimeout(() => {
+                enterScreen.style.display = 'none';
+                mainContent.classList.add('active');
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>
